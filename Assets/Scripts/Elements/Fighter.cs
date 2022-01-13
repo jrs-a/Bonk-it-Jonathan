@@ -6,16 +6,16 @@ public class Fighter : MonoBehaviour
 {
     //public fields
     public int hitpoint;
-    public int maxHitpoint;                 
-    
+    //public int maxHitpoint;                 
+
     //immunity
-    protected float immuneTime = 1.0f;      
-    protected float lastImmune;             
+    protected float immuneTime = 1.0f;
+    protected float lastImmune;
 
     //all fighter can get damage and die
     protected virtual void ReceiveDamage(Damage dmg)
     {
-        if(Time.time - lastImmune > immuneTime)
+        if (Time.time - lastImmune > immuneTime)
         {
             lastImmune = Time.time;
             hitpoint -= dmg.damageAmount;
@@ -39,6 +39,5 @@ public class Fighter : MonoBehaviour
 
     protected virtual void Death()
     {
-
     }
 }

@@ -1,17 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public PlayerController player;
     public FloatingTextManager floatingTextManager;
-    public static txtEnergy txtEnergy;
-    
-    public List<Sprite> playerSprites;
+    public LevelLoader levelLoader;
     public int energy = 10;
-    
+    public int gamevolume = 5;
+    [HideInInspector] public bool activated = false;
+    [HideInInspector] public Vector3 loadPos = Vector3.zero;
+
+    private PlayerData playerData;
+    [HideInInspector] public string path = "";
+    private string persistentPath = "";
+
     private void Awake()
     {
         if (GameManager.instance != null)
@@ -20,36 +26,71 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        SceneManager.sceneLoaded += LoadState;
+        //SceneManager.sceneLoaded += LoadState; --- replace with launching loadstate to load settings on launch
         DontDestroyOnLoad(gameObject);
-
-        //PlayerPrefs.DeleteAll(); - restart game(clear all prefs in data)
     }
 
-    public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    void Start()
     {
+        SetPaths();
+    }
+
+    public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration) {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
+    }
+
+    public int  initialEnergyPerLevel (int sceneIndex) {
+        switch (sceneIndex) {
+            case 1:
+                return 20;
+            case 2: 
+                return 50;
+            case 3:
+                return 40;
+            default:
+                break;
+        }
+        return 17;
     }
 
     public void SaveState()
     {
-        string s = "";
-        s += "0" + "|"; // INT preferred Skin
-        s += energy.ToString() + "|"; // INT pesos
-
-        PlayerPrefs.SetString("SaveState", s);
-        Debug.Log("SaveState");
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int sceneInitialEnergy = initialEnergyPerLevel(sceneIndex);
+        Vector3 player_pos = GameObject.Find("Player").transform.position;
+            float x = player_pos.x;
+            float y = player_pos.y;
+            float z = player_pos.z;
+        playerData = new PlayerData(sceneIndex, energy, sceneInitialEnergy, gamevolume, x, y, z);
+        SaveData();
     }
 
-    public void LoadState(Scene s, LoadSceneMode mode)
-    {
-        if (!PlayerPrefs.HasKey("SaveState"))
-            return;
-        string[] data = PlayerPrefs.GetString("SaveState").Split('|');
-        //0|10|0|0 from the values in the string above
-        //Change player skin
-        energy = int.Parse(data[1]); 
-
-        Debug.Log("LoadState");
+    private void SetPaths() {
+        path = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
     }
+    
+    public void SaveData() {
+        string savePath = path;
+        Debug.Log("Saving data at " + savePath);
+        
+        string json  = JsonUtility.ToJson(playerData);
+        Debug.Log(json);
+
+        using StreamWriter writer = new StreamWriter(savePath);
+        writer.Write(json);
+    }
+
+    // public void LoadData() {
+    //     using StreamReader reader = new StreamReader(path);
+    //     string json = reader.ReadToEnd();
+    //     PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+    //     Debug.Log(data.ToString());
+
+    //     int sI = data.sceneIndex;
+    //     int en = data.energy;
+    //     float x = data.x;
+    //     float y = data.y;
+    //     float z = data.z;
+    // }
 }

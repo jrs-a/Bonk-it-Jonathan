@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,11 +6,18 @@ public class FloatingTextManager : MonoBehaviour
 {
     public GameObject textContainer;
     public GameObject textPrefab;
+    static FloatingTextManager txtmgrInstance;
 
     private List<FloatingText> floatingTexts = new List<FloatingText>();
 
-    private void Start()
+    private void Awake()
     {
+        if (FloatingTextManager.txtmgrInstance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        txtmgrInstance = this;
         DontDestroyOnLoad(gameObject);
     }
     private void Update()
