@@ -9,8 +9,8 @@ public class CameraMotor : MonoBehaviour
     public float boundY = 0.5f;
 
 
-    //late update means it works after the player has moved
-    private void LateUpdate()
+    
+    private void LateUpdate()   //late update means it works after the player has moved
     {
         Vector3 delta = Vector3.zero;
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fighter
   - Movable
+  - Step_activator
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Blocking
   - Actor
-  - 
+  - Movable
   - 
   - 
   - 

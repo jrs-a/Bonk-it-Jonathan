@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 255699363719995163}
   - component: {fileID: 8129492172673438285}
   m_Layer: 0
-  m_Name: portal
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1983899361
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 9158662070505879003, guid: 3419ac9cc55dac5499e3e1d34344c1f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -157,6 +157,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  tombsUnlocked: 0
+  tombsLocked: 0
+  anim: {fileID: 8681048118282485270}
 --- !u!114 &8129492172673438285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,4 +213,4 @@ MonoBehaviour:
   - {x: -1.3783617, y: -0.5055852, z: 0}
   m_ShapePathHash: -2032371123
   m_Mesh: {fileID: 0}
-  m_InstanceId: 44588
+  m_InstanceId: 210874

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : Collidable
@@ -12,45 +10,35 @@ public class Weapon : Collidable
     private float cooldown = 0f;
     private float lastSwing;
 
-    protected override void Start()
-    {
+    protected override void Start() {
         base.Start();
         anim = GetComponent<Animator>();
     }
 
-    protected override void Update()
-    {
+    protected override void Update() {
         base.Update();
         
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Time.time - lastSwing > cooldown)
-            {
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (Time.time - lastSwing > cooldown) {
                 lastSwing = Time.time;
                 Swing();
             }
         }
     }
 
-    protected override void OnCollide(Collider2D coll)
-    {
-        if(coll.tag == "Fighter")
-        {
+    protected override void OnCollide(Collider2D coll) {
+        if(coll.tag == "Fighter") {
             if(coll.name == "Player")
                 return;
 
-            Damage dmg = new Damage //to be sent to enemy
-            {
-                damageAmount = damagePoint
-            };
+            Damage dmg = new Damage { damageAmount = damagePoint };
 
             coll.SendMessage("ReceiveDamage", dmg);
         }
         
     }
 
-    private void Swing()
-    {
+    private void Swing() {
         anim.SetTrigger("Swing");
     }
 }

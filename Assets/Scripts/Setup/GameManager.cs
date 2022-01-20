@@ -13,15 +13,15 @@ public class GameManager : MonoBehaviour
     public int gamevolume = 5;
     [HideInInspector] public bool activated = false;
     [HideInInspector] public Vector3 loadPos = Vector3.zero;
+    [HideInInspector] public bool playerCanGoTo = true;
 
+    //saving data to json
     private PlayerData playerData;
     [HideInInspector] public string path = "";
     private string persistentPath = "";
 
-    private void Awake()
-    {
-        if (GameManager.instance != null)
-        {
+    private void Awake() {
+        if (GameManager.instance != null) {
             Destroy(gameObject);
             return;
         }
@@ -30,8 +30,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
+    void Start() {
         SetPaths();
     }
 
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
     public int  initialEnergyPerLevel (int sceneIndex) {
         switch (sceneIndex) {
             case 1:
-                return 20;
+                return 50;
             case 2: 
                 return 50;
             case 3:
@@ -53,8 +52,7 @@ public class GameManager : MonoBehaviour
         return 17;
     }
 
-    public void SaveState()
-    {
+    public void SaveState() {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         int sceneInitialEnergy = initialEnergyPerLevel(sceneIndex);
         Vector3 player_pos = GameObject.Find("Player").transform.position;

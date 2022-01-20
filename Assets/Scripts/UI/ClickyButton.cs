@@ -59,6 +59,12 @@ public class ClickyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         GameManager.instance.levelLoader.LoadLevel(0);
     }
 
+    public void iGoToMenuFromEndGame() {    //only one button will use this (end game scene)
+        string path = GameManager.instance.path;
+        System.IO.File.Delete(path);
+        GameManager.instance.levelLoader.LoadLevel(0);
+    }
+
     public void iResetGame() {
         string path = GameManager.instance.path;
         System.IO.File.Delete(path);

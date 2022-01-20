@@ -8,8 +8,7 @@ public class Teleport : Collidable
     private Vector3 endPosition;
     private Color tmp;
 
-    protected override void OnCollide(Collider2D coll)
-    {
+    protected override void OnCollide(Collider2D coll) {
         endPosition = iGoHere.GetComponent<Transform>().position;
 
         tmp = player.GetComponent<SpriteRenderer>().color;
