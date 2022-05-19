@@ -6,18 +6,18 @@ public class FloatingTextManager : MonoBehaviour
 {
     public GameObject textContainer;
     public GameObject textPrefab;
-    static FloatingTextManager txtmgrInstance;
+    static FloatingTextManager instance;
 
     private List<FloatingText> floatingTexts = new List<FloatingText>();
 
     private void Awake()
     {
-        if (FloatingTextManager.txtmgrInstance != null)
+        if (FloatingTextManager.instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        txtmgrInstance = this;
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
     private void Update()

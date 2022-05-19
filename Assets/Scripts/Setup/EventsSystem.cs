@@ -21,10 +21,10 @@ public class EventsSystem : MonoBehaviour
             onTombLock();
     }
 
-    public event Action onGateUnlock;   //FOR CINEMACHINE
-    public void UnlockGate() {
+    public event Action<int> onGateUnlock;   //FOR CINEMACHINE
+    public void UnlockGate(int id) {
         if (onGateUnlock != null)
-            onGateUnlock();
+            onGateUnlock(id);
     }
 
     public event Action onPortalOpen;   //FOR CINEMACHINE
@@ -33,10 +33,10 @@ public class EventsSystem : MonoBehaviour
             onPortalOpen();
     }
 
-    public event Action onGateOpen;     //THE GATE IS ACTUALLY OPENED :D
-    public void OpenGate() {
+    public event Action<int> onGateOpen;     //THE GATE IS ACTUALLY OPENED :D
+    public void OpenGate(int id) {
         if(onGateOpen != null)
-            onGateOpen();
+            onGateOpen(id);
     }
 
     public event Action onPhase0Activate;
@@ -93,4 +93,19 @@ public class EventsSystem : MonoBehaviour
         if(onPortalEnter != null)
             onPortalEnter();
     }
+
+    public event Action onPlayerMove;   //tells that player has moved
+    public void PlayerMove() {
+        if(onPlayerMove != null)
+            onPlayerMove();
+    }
+
+    public event Action onDialogueStop; //tells that the dialogue has been closed
+    public void StopDialogue() {
+        if(onDialogueStop != null)   
+            onDialogueStop();
+    }
+
+    
+
 }

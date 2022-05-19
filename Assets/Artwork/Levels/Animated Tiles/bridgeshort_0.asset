@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: bridgeshort_0
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 8231610739846317041, guid: 3419ac9cc55dac5499e3e1d34344c1f8, type: 3}
+  - {fileID: 4487785939775237222, guid: 3419ac9cc55dac5499e3e1d34344c1f8, type: 3}
+  - {fileID: 7403398440661790458, guid: 3419ac9cc55dac5499e3e1d34344c1f8, type: 3}
+  - {fileID: 6262040995122190732, guid: 3419ac9cc55dac5499e3e1d34344c1f8, type: 3}
+  m_MinSpeed: 3
+  m_MaxSpeed: 3
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0

@@ -32,6 +32,11 @@ public class PlayerController : Fighter
             if(!hasDied) 
                 StartCoroutine(deads());
         }
+
+        if(DialogueManager.GetInstance().dialogueIsPlaying)
+            controls.Disable();
+        else
+            controls.Enable();
     }
 
     IEnumerator deads() {
@@ -56,6 +61,7 @@ public class PlayerController : Fighter
                 if (energy > 1)     //to prevent walk and die animation happening at the same tile
                     anim.SetTrigger("isWalking");
                 GameManager.instance.energy -= 1;   //has to be here to not disrupt walk animation
+                EventsSystem.current.PlayerMove();
             }
         }
     }

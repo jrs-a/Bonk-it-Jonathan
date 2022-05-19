@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,7 +35,7 @@ public class LevelLoader : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         loadingScreen.SetActive(true);
-        LeanTween.alphaCanvas(loadingCanvas, 1, 1);
+        LeanTween.alphaCanvas(loadingCanvas, 1, 0.2f);
 
         while (!operation.isDone)
         {
@@ -43,12 +44,8 @@ public class LevelLoader : MonoBehaviour
             progressText.text = "Game Loading " + progress * 100f + "%";
             yield return null;
         }
-
-        yield return new WaitForSecondsRealtime(2f);
-
-        Debug.Log("done loading");
-        LeanTween.alphaCanvas(loadingCanvas, 0, 1);
-        loadingScreen.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.5f);
+        StartCoroutine(closeLoading());
     }
 
     public void showLevelCompleteScreen()
@@ -63,5 +60,11 @@ public class LevelLoader : MonoBehaviour
         LeanTween.scale(deadbols_screen, new Vector3(1, 1, 1), 0.1f);
         LeanTween.alphaCanvas(deadbols_bg.GetComponent<CanvasGroup>(), 1, 0.1f).setEase(LeanTweenType.linear);
         deadbols_bg.SetActive(true);
+    }
+
+    IEnumerator closeLoading() {
+        yield return new WaitForSecondsRealtime(1f);
+        LeanTween.alphaCanvas(loadingCanvas, 0, 0.2f);
+        loadingScreen.SetActive(false);
     }
 }

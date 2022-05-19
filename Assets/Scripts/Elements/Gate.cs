@@ -3,6 +3,7 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     bool isOpen = false;
+    public int id;
 
     void Start() {
         EventsSystem.current.onGateOpen += openingGate;
@@ -12,10 +13,12 @@ public class Gate : MonoBehaviour
         GameManager.instance.playerCanGoTo = isOpen;
     }
 
-    private void openingGate() {
-        EventsSystem.current.UnlockGate();  //CINEMACHINE
-        isOpen = true;
-        LeanTween.color(gameObject, new Vector4(255,255,255,0), 0.65f);
+    private void openingGate(int id) {
+        if(id == this.id) {
+            EventsSystem.current.UnlockGate(id);  //CINEMACHINE
+            isOpen = true;
+            LeanTween.color(gameObject, new Vector4(255,255,255,0), 0.65f);
+        }
     }
 
     void OnDestroy() {

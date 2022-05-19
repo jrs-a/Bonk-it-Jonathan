@@ -290,6 +290,9 @@ TextureImporter:
   - first:
       213: -9205088829547167019
     second: plainDecoration_1_block
+  - first:
+      213: -1216208704867883731
+    second: plainDecoration_1_96
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -2390,6 +2393,27 @@ TextureImporter:
       bones: []
       spriteID: 5d2ccecea74f04080800000000000000
       internalID: -9205088829547167019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plainDecoration_1_96
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 30
+        width: 8
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d25ac9d60a82f1fe0800000000000000
+      internalID: -1216208704867883731
       vertices: []
       indices: 
       edges: []

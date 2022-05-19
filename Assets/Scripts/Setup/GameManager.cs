@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
@@ -26,19 +24,16 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        //SceneManager.sceneLoaded += LoadState; --- replace with launching loadstate to load settings on launch
         DontDestroyOnLoad(gameObject);
-    }
-
-    void Start() {
         SetPaths();
+        LoadSettings();
     }
 
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration) {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
     }
 
-    public int  initialEnergyPerLevel (int sceneIndex) {
+    public int initialEnergyPerLevel (int sceneIndex) {
         switch (sceneIndex) {
             case 1:
                 return 50;
@@ -46,6 +41,10 @@ public class GameManager : MonoBehaviour
                 return 50;
             case 3:
                 return 40;
+            case 4:
+                return 50;
+            case 5: 
+                return 160;
             default:
                 break;
         }
@@ -63,11 +62,6 @@ public class GameManager : MonoBehaviour
         SaveData();
     }
 
-    private void SetPaths() {
-        path = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
-        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
-    }
-    
     public void SaveData() {
         string savePath = path;
         Debug.Log("Saving data at " + savePath);
@@ -79,16 +73,17 @@ public class GameManager : MonoBehaviour
         writer.Write(json);
     }
 
-    // public void LoadData() {
-    //     using StreamReader reader = new StreamReader(path);
-    //     string json = reader.ReadToEnd();
-    //     PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-    //     Debug.Log(data.ToString());
+    private void SetPaths() {
+        path = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveData.json";
+    }
 
-    //     int sI = data.sceneIndex;
-    //     int en = data.energy;
-    //     float x = data.x;
-    //     float y = data.y;
-    //     float z = data.z;
-    // }
+    int vol;
+    public void LoadSettings() {
+        
+        if(PlayerPrefs.HasKey("volume"))
+            vol = PlayerPrefs.GetInt("volume");
+        
+        gamevolume = vol;
+    }
 }
