@@ -1,4 +1,7 @@
-Bonk it Jonathan
+# Bonk it Jonathan
+
+## Preview
+![bonk](https://github.com/jrs-a/Bonk-it-Jonathan/assets/87791386/771a5538-c6bb-4fe7-b47c-8825e8eae8ec)
 
 Initialer commit contains
 - moving jonathan 
